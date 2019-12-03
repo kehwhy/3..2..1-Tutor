@@ -19,17 +19,6 @@ public class MyAvailability extends AppCompatActivity
 {
     private String error = null;
 
-    private void refreshErrorMessage() {
-        // set the error message
-        TextView tvError = (TextView) findViewById(R.id.error);
-        tvError.setText(error);
-
-        if (error == null || error.length() == 0) {
-            tvError.setVisibility(View.GONE);
-        } else {
-            tvError.setVisibility(View.VISIBLE);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +34,21 @@ public class MyAvailability extends AppCompatActivity
             }
         });
         refreshErrorMessage();
+
+
     }
+
+    private void refreshErrorMessage() {
+        // set the error message
+        TextView tvError = (TextView) findViewById(R.id.error);
+        tvError.setText(error);
+
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
+    }
+
 
 }

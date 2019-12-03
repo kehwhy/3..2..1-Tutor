@@ -11,7 +11,7 @@ import ca.mcgill.ecse321.tutoringserivce.R;
 public class availabilityActivity extends AppCompatActivity {
 
 
-    public void openAvail(View view) {
+    public void openAvailab(View view) {
         Intent intent = new Intent(this, MyAvailability.class);
         startActivity(intent);
     }
