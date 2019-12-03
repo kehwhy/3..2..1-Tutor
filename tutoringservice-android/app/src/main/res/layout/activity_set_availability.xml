@@ -58,36 +58,13 @@
                 android:textColor="#F5F5F5" />
 
             <TextView
-                android:id="@+id/startDate"
+                android:id="@+id/onlyDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:onClick="showDatePickerDialog"
                 android:text="@string/startdate_first"
                 android:textColor="#F5F5F5" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/enddate_label"
-                android:textColor="#F5F5F5" />
-
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:onClick="showTimePickerDialog"
-                android:text="@string/enddate_first"
-                android:textColor="#F5F5F5" />
-
         </LinearLayout>
 
         <LinearLayout
