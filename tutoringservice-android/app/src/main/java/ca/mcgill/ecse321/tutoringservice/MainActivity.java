@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.tutoringserivce;
+package ca.mcgill.ecse321.tutoringservice;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import ca.mcgill.ecse321.tutoringserivce.R;
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "ca.mcgill.ecse321.tutoringservice.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
