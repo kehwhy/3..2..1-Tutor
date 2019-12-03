@@ -8,10 +8,6 @@
 
     android:background="#330C2F">
 
-
-
-
-
     <TableLayout
         android:layout_marginTop="10dp"
         android:id="@+id/table_layout"
