@@ -42,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openAvail(View viewa) {
+        Intent intent1 = new Intent(this, availabilityActivity.class);
+        startActivity(intent1);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
