@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,30 +43,45 @@ public class LoginActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
         error = "";
+        refreshErrorMessage();
         final EditText tvEmail = (EditText) findViewById(R.id.email);
         final EditText tvPassword = (EditText) findViewById(R.id.password);
         RequestParams params = new RequestParams();
-        params.put("tutorEmail", "tvEmail.getText().toString()");
-        params.put("password", "tvPassword.getText().toString()");
+        System.out.println(tvEmail.getText().toString());
+        System.out.println(tvPassword.getText().toString());
+        params.put("tutorEmail", tvEmail.getText().toString());
+        params.put("password", tvPassword.getText().toString());
 
         HttpUtils.post("login/" + tvEmail.getText().toString(), params, new JsonHttpResponseHandler() {
 
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                System.out.println("Success!!");
+//                tvEmail.setText("");
+//                tvPassword.setText("");
 
-                refreshErrorMessage();
-                tvEmail.setText("");
-                tvPassword.setText("");
-                startActivity(intent);
 
             }
 
+            @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
                 try {
                     error += errorResponse.get("message").toString();
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
                 refreshErrorMessage();
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String string, Throwable throwable){
+
+            }
+            public void onFinish(){
+                if (error.equals("")){
+                    System.out.println("Success!!");
+                    startActivity(intent);
+                }
             }
         });
 
