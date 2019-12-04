@@ -4,10 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-
-public class SessionsActivity extends AppCompatActivity {
-
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +22,10 @@ import java.util.List;
 
 import ca.mcgill.ecse321.tutoringservice.R;
 import cz.msebera.android.httpclient.Header;
+
+
+
+
 
 public class SessionsActivity extends AppCompatActivity {
 
