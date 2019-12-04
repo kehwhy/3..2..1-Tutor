@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import ca.mcgill.ecse321.tutoringserivce.R;
+import ca.mcgill.ecse321.tutoringservice.R;
 
 public class SetAvailability extends AppCompatActivity {
     private String error = null;

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import ca.mcgill.ecse321.tutoringserivce.R;
+import ca.mcgill.ecse321.tutoringservice.R;
 
 public class availabilityActivity extends AppCompatActivity {
 
