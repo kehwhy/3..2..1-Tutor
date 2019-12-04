@@ -6,10 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import cz.msebera.android.httpclient.Header;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import ca.mcgill.ecse321.tutoringserivce.R;
 
 public class SetAvailability extends AppCompatActivity {
     private String error = null;
+    private String tutorEmail= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +97,8 @@ public class SetAvailability extends AppCompatActivity {
         tv.setText(String.format("%02d-%02d-%04d", d, m + 1, y));
     }
 
-    // AddEvent but to be changed to SetAvailability
-    // TODO : Make this SetAvailability
-    /*
-    public void setAvailability(View v) {
+
+    public void setAvailabilityMethod(View v) {
         // start time
         TextView tv = (TextView) findViewById(R.id.startTime);
         String text = tv.getText().toString();
@@ -97,8 +107,8 @@ public class SetAvailability extends AppCompatActivity {
         int startHours = Integer.parseInt(comps[0]);
         int startMinutes = Integer.parseInt(comps[1]);
 
-        // start date
-        tv = (TextView) findViewById(R.id.startDate);
+        // date
+        tv = (TextView) findViewById(R.id.onlyDate);
         text = tv.getText().toString();
         comps = text.split("-");
 
@@ -114,18 +124,28 @@ public class SetAvailability extends AppCompatActivity {
         int endHours = Integer.parseInt(compsEnd[0]);
         int endMinutes = Integer.parseInt(compsEnd[1]);
 
-        // end date
-        tvEnd = (TextView) findViewById(R.id.endDate);
-        text = tvEnd.getText().toString();
-        compsEnd = text.split("-");
+        // send the HTTP request to get the currently logged in user => tutorEmail
+        HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
 
-        int yearEnd = Integer.parseInt(compsEnd[2]);
-        int monthEnd = Integer.parseInt(compsEnd[1]);
-        int dayEnd = Integer.parseInt(compsEnd[0]);
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-        // name -- TODO: Do I need an availability ID?
-        tv = (TextView) findViewById(R.id.newevent_name);
-        String name = tv.getText().toString();
+                try {
+                    tutorEmail = (response.getJSONObject("tutorEmail").getString("tutorEmail"));
+                } catch (Exception e) {
+                    error += e.getMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+            }
+        });
 
         // TODO: supply the end time to the REST request as an additional parameter
         // Reminder: calling the service looks like this:
@@ -138,11 +158,11 @@ public class SetAvailability extends AppCompatActivity {
         rp.add("startTime", formatter.format(startHours) + ":" + formatter.format(startMinutes));
         rp.add("endTime", formatter.format(endHours) + ":" + formatter.format(endMinutes));
 
-        HttpUtils.post("events/" + name, rp, new JsonHttpResponseHandler() {
+        HttpUtils.post("/availabilities/" + tutorEmail, rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
-                ((TextView) findViewById(R.id.newevent_name)).setText("");
+//                ((TextView) findViewById(R.id.newevent_name)).setText("");
             }
 
             @Override
@@ -155,7 +175,7 @@ public class SetAvailability extends AppCompatActivity {
                 refreshErrorMessage();
             }
         });
-    } */
+    }
 
 
     private void refreshErrorMessage() {

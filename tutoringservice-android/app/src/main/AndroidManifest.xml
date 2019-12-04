@@ -11,22 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ca.mcgill.ecse321.tutoringservice.MyAvailability"
+        <activity android:name="ca.mcgill.ecse321.tutoringservice.MyAvailability"></activity>
+        <activity
+            android:name="ca.mcgill.ecse321.tutoringservice.SetAvailability"
             android:parentActivityName="ca.mcgill.ecse321.tutoringservice.availabilityActivity">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.mcgill.ecse321.tutoringservice.availabilityActivity" />
         </activity>
-        <activity android:name="ca.mcgill.ecse321.tutoringservice.SetAvailability"
-            android:parentActivityName="ca.mcgill.ecse321.tutoringservice.availabilityActivity">
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.mcgill.ecse321.tutoringservice.availabilityActivity" />
-        </activity>
-        <activity android:name="ca.mcgill.ecse321.tutoringservice.availabilityActivity"
+        <activity
+            android:name="ca.mcgill.ecse321.tutoringservice.availabilityActivity"
             android:parentActivityName="ca.mcgill.ecse321.tutoringservice.MainActivity">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
