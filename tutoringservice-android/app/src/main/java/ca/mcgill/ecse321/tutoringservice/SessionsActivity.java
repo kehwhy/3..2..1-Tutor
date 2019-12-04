@@ -34,34 +34,7 @@ public class SessionsActivity extends AppCompatActivity {
 
     private String error = null;
 
-    private String tutorEmail= "williambouchard3@mail.mcgill.ca";
     //displays when created
-
-
-    public void getEmail(){
-        // send the HTTP request to get the currently logged in user => tutorEmail
-        HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-                    tutorEmail = (response.getString("email"));
-                } catch (Exception e) {
-                    error += e.getMessage();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-            }
-        });
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +73,7 @@ public class SessionsActivity extends AppCompatActivity {
         });
         //refreshing sessions list
         refreshList(sessionAdapter, sessionNames,
-                "/sessions/" + tutorEmail, "id");
+                "/sessions/william.bouchard3@mail.mcgill.ca/", "id");
     }
 
     private void refreshList(final ArrayAdapter<String> adapter, final List<String> names,
@@ -150,7 +123,7 @@ public class SessionsActivity extends AppCompatActivity {
 
 
         // send the HTTP request to get the sessions of currently logged in student
-        HttpUtils.get("/sessions/" + tutorEmail, new RequestParams(), new JsonHttpResponseHandler() {
+        HttpUtils.get("/sessions/william.bouchard3@mail.mcgill.ca/", new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
