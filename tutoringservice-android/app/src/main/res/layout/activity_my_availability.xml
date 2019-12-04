@@ -8,183 +8,127 @@
     android:background="#330C2F">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        app:layout_constraintVertical_bias="0.024">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/myAvailability"
+                android:textColor="#F5F5F5"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="MY AVAILABILITIES"
-            android:textColor="#F5F5F5"
-            android:textSize="35dp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:visibility="gone"/>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|fill_horizontal"
-            android:stretchColumns="1">
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_gravity="bottom"
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="Day of the Week" />
-
-                <TextView
-                    android:layout_gravity="bottom"
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="Month" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="Start \nDate" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="End \nDate" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="Start \nTime" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="End \nTime" />
-            </TableRow>
-            <View
-                android:layout_height="2dip"
-                android:background="#FF909090" />
-            <TableRow>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/day_of_week" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/month" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/start_date" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/end_date" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/start_time" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/end_time" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="DELETE" />
-            </TableRow>
-            <View
-                android:layout_height="2dip"
-                android:background="#FF909090" />
-            <TableRow>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/day_of_week" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/month" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/start_date" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/end_date" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/start_time" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="@string/end_time" />
-
-                <TextView
-                    android:padding="3dip"
-                    android:textColor="#F5F5F5"
-                    android:text="DELETE" />
-            </TableRow>
-        </TableLayout>
+            <Spinner
+                android:id="@+id/sessionspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F5F5F5"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="414dp"
-        android:layout_height="543dp"
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="409dp"
+        android:layout_height="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.638">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/setAvailButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="86dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/set_avail_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--        android:onClick="addPerson"/>-->
+            <TextView
+                android:id="@+id/dateHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:text="Date:"
+                android:textAlignment="textEnd"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp" />
 
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/starttimeHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:text="Start Time:"
+                android:textAlignment="textEnd"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/endtimeHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:text="End Time:"
+                android:textAlignment="textEnd"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:textColor="#F5F5F5"
+                android:textSize="20dp" />
+        </TableRow>
+
+
+
+
+
+
+        
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
