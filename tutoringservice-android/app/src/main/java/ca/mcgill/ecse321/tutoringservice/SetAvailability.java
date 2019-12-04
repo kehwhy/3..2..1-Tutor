@@ -21,7 +21,11 @@ import ca.mcgill.ecse321.tutoringserivce.R;
 
 public class SetAvailability extends AppCompatActivity {
     private String error = null;
+<<<<<<< HEAD
     private String tutorEmail= "";
+=======
+    private String tutorEmail = "";
+>>>>>>> 9592ee41c7915d76076d0febe2d9936c2a5215dd
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +101,15 @@ public class SetAvailability extends AppCompatActivity {
         tv.setText(String.format("%02d-%02d-%04d", d, m + 1, y));
     }
 
+<<<<<<< HEAD
 
     public void setAvailabilityMethod(View v) {
+=======
+    // AddEvent but to be changed to SetAvailability
+    // TODO : Make this SetAvailability
+
+    public void setAvailability(View v) {
+>>>>>>> 9592ee41c7915d76076d0febe2d9936c2a5215dd
         // start time
         TextView tv = (TextView) findViewById(R.id.startTime);
         String text = tv.getText().toString();
