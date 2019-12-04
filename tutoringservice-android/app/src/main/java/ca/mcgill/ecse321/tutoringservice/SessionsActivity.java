@@ -119,7 +119,7 @@ public class SessionsActivity extends AppCompatActivity {
         final TextView date = (TextView) findViewById(R.id.date);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
-
+        final TextView status = (TextView) findViewById(R.id.status);
 
 
         // send the HTTP request to get the sessions of currently logged in student
@@ -133,7 +133,8 @@ public class SessionsActivity extends AppCompatActivity {
                     date.setText(response.getJSONObject(index).getString("date"));
                     startTime.setText(response.getJSONObject(index).getString("startTime"));
                     endTime.setText(response.getJSONObject(index).getString("endTime"));
-                    
+                    status.setText(response.getJSONObject(index).getString("isApproved"));
+
                 } catch (Exception e) {
                     error += e.getMessage();
                 }
