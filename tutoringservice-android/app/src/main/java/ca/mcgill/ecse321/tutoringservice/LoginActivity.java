@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,17 +54,13 @@ public class LoginActivity extends AppCompatActivity {
         HttpUtils.post("login/" + tvEmail.getText().toString(), params, new JsonHttpResponseHandler() {
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
                 System.out.println("Success!!");
-//                tvEmail.setText("");
-//                tvPassword.setText("");
-
-
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
                 try {
                     error += errorResponse.get("message").toString();
                 } catch (JSONException e) {
@@ -73,16 +68,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 refreshErrorMessage();
             }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String string, Throwable throwable){
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable throwable) {
+                System.out.println("Success!!");
+                startActivity(intent);
+                error += errorResponse;
+                refreshErrorMessage();
             }
-            public void onFinish(){
-                if (error.equals("")){
-                    System.out.println("Success!!");
-                    startActivity(intent);
-                }
-            }
+
         });
 
     }
