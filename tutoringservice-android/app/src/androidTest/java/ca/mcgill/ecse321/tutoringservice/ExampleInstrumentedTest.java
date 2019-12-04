@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.tutoringserivce;
+package ca.mcgill.ecse321.tutoringservice;
 
 import android.content.Context;
 

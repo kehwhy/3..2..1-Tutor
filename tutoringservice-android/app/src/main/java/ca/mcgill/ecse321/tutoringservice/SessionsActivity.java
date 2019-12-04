@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcgill.ecse321.tutoringserivce.R;
+import ca.mcgill.ecse321.tutoringservice.R;
 import cz.msebera.android.httpclient.Header;
 
 public class SessionsActivity extends AppCompatActivity {
