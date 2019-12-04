@@ -3,6 +3,10 @@ package ca.mcgill.ecse321.tutoringservice;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -14,13 +18,13 @@ import android.view.MenuItem;
 
 import ca.mcgill.ecse321.tutoringservice.R;
 
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "ca.mcgill.ecse321.tutoringservice.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SessionsActivity.class);
         startActivity(intent);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">tutoringservice-android</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome_message">Welcome Tutor</string>
     <string name="selectSeshText">Select a session</string>
+
 </resources>

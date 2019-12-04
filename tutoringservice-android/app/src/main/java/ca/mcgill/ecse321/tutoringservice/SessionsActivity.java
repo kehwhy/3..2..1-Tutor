@@ -3,6 +3,11 @@ package ca.mcgill.ecse321.tutoringservice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+
+public class SessionsActivity extends AppCompatActivity {
+
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +40,7 @@ public class SessionsActivity extends AppCompatActivity {
     private String error = null;
 
     //displays when created
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
