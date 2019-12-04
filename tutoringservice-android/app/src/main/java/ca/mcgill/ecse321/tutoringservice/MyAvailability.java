@@ -26,8 +26,6 @@ import cz.msebera.android.httpclient.Header;
 *  Upon doing so, you will see it when you come back to this page.
 *  This code is similar to SessionsActivity to have a mutual format. */
 public class MyAvailability extends AppCompatActivity {
-
-
     private ArrayAdapter<String> availAdapter;
     private List<String> availNames = new ArrayList<>();
 
@@ -36,14 +34,15 @@ public class MyAvailability extends AppCompatActivity {
 
     private String selectedAvailID = "";
 
-    private String error = null;
+    private String error = "";
 
-    //displays when created
+    // Displays when created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_availability);
 
+        // Get the spinner from the xml file
         Spinner availSpinner = (Spinner) findViewById(R.id.availspinner);
 
         availAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availNames);
@@ -62,7 +61,7 @@ public class MyAvailability extends AppCompatActivity {
                     Object index = parentView.getSelectedItemPosition();
                     selectedAvailID = index.toString();
                     int index_int = Integer.parseInt(selectedAvailID)-1;
-                    //refreshing table with session information using Index.
+                    //refreshing table with availability information using Index.
                     refreshAvailTable(index_int);
                 }
             }
@@ -71,9 +70,7 @@ public class MyAvailability extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {}
 
         });
-        //refreshing sessions list
-        /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
-        *  More information can be found in our Project Wiki on GitHub: https://github.com/McGill-ECSE321-Fall2019/project-group-2/wiki */
+        // Refreshing availability list
         refreshList(availAdapter, availNames,
                 "/availabilities/"+LoginActivity.tEmail, "id");
     }
@@ -84,16 +81,14 @@ public class MyAvailability extends AppCompatActivity {
         String fcn = restFunctionName;
         HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
 
+            /* Iterate through the objects in the response to display the information in the
+            /* dropdown list */
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                // iterate through the objects in the response to display the information in the
-                // dropdown list
                 names.clear();
                 names.add("Please select...");
                 for( int i = 0; i < response.length(); i++){
                     try {
-                        //String option = response.getJSONObject(i).getString(identifier0);
                         names.add(Integer.toString(i+1));
                     } catch (Exception e) {
                         error += e.getMessage();
@@ -115,28 +110,26 @@ public class MyAvailability extends AppCompatActivity {
 
     }
 
-    /* This is called when a session is selected and the table needs to be populated with it's information */
+    /* This is called when a availability is selected and the table needs to be populated with
+       its information */
     public void refreshAvailTable(final int index){
-        // get the text objects by id from the view so that they can be populated
+        // Get the text objects by id from the view so that they can be populated
         final TextView date = (TextView) findViewById(R.id.date);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         final TextView status = (TextView) findViewById(R.id.status);
 
 
-        // send the HTTP request to get the sessions of currently logged in student
+        // Send the HTTP request to get the availabilities of currently logged in tutor
         HttpUtils.get("/availabilities/"+LoginActivity.tEmail, new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
                 try {
-                    //setting the values for table based on the data from JSON Array
+                    // Setting the values for table based on the data from JSON Array
                     date.setText(response.getJSONObject(index).getString("date"));
                     startTime.setText(response.getJSONObject(index).getString("startTime"));
                     endTime.setText(response.getJSONObject(index).getString("endTime"));
-                    status.setText(response.getJSONObject(index).getString("isApproved"));
-
                 } catch (Exception e) {
                     error += e.getMessage();
                 }

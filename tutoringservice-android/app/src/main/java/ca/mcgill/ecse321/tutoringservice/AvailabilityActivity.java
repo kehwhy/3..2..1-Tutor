@@ -11,17 +11,17 @@ import ca.mcgill.ecse321.tutoringservice.R;
 /* This class is used as a dashboard to select to view or set availability. */
 public class AvailabilityActivity extends AppCompatActivity {
 
-
+    // Opens the page My Availability
     public void openAvailab(View view) {
         Intent intent = new Intent(this, MyAvailability.class);
         startActivity(intent);
     }
 
+    // Opens the page Set Availability
     public void setAvail(View viewa) {
         Intent intent1 = new Intent(this, SetAvailability.class);
         startActivity(intent1);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

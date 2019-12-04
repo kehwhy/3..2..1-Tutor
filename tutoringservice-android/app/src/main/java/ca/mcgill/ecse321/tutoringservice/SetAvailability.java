@@ -25,9 +25,9 @@ public class SetAvailability extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_availability);
-
     }
 
+    // Gets the Time from the label
     private Bundle getTimeFromLabel(String text) {
         Bundle rtn = new Bundle();
         String comps[] = text.toString().split(":");
@@ -45,6 +45,7 @@ public class SetAvailability extends AppCompatActivity {
         return rtn;
     }
 
+    // Gets the date from the label
     private Bundle getDateFromLabel(String text) {
         Bundle rtn = new Bundle();
         String comps[] = text.toString().split("-");
@@ -65,6 +66,7 @@ public class SetAvailability extends AppCompatActivity {
         return rtn;
     }
 
+    // Displays Time picker for Start and End times
     public void showTimePickerDialog(View v) {
         TextView tf = (TextView) v;
         Bundle args = getTimeFromLabel(tf.getText().toString());
@@ -75,6 +77,7 @@ public class SetAvailability extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    // Displays Date picker for the date
     public void showDatePickerDialog(View v) {
         TextView tf = (TextView) v;
         Bundle args = getDateFromLabel(tf.getText().toString());
@@ -85,17 +88,19 @@ public class SetAvailability extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    // Sets the time in specific format
     public void setTime(int id, int h, int m) {
         TextView tv = (TextView) findViewById(id);
         tv.setText(String.format("%02d:%02d", h, m));
     }
 
+    // Sets the date in specific format
     public void setDate(int id, int d, int m, int y) {
         TextView tv = (TextView) findViewById(id);
         tv.setText(String.format("%02d-%02d-%04d", d, m + 1, y));
     }
 
-    // This method calls the http handles to get the currently logged in user and create an
+    // This method calls the http to get the currently logged in user and create an
     // availability with the information chosen through the app.
     public void setAvailabilityA(View v) {
         // start time
@@ -125,18 +130,20 @@ public class SetAvailability extends AppCompatActivity {
 
         RequestParams rp = new RequestParams();
 
+        // Gets these values for the backend
         NumberFormat formatter = new DecimalFormat("00");
         rp.add("date", year + "-" + formatter.format(month) + "-" + formatter.format(day));
         rp.add("startTime", formatter.format(startHours) + ":" + formatter.format(startMinutes));
         rp.add("endTime", formatter.format(endHours) + ":" + formatter.format(endMinutes));
 
-        // See reasons for hardcoding tutorEmail above.
+        // Sends the new availability slot to the tutor's profile.
         HttpUtils.post("/availabilities/" + LoginActivity.tEmail, rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
             }
 
+            // Reasons for failure are handled in the backend (such as selecting a date that has passed)
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
