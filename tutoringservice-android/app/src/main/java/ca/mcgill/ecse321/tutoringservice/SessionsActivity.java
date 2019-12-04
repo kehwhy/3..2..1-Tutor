@@ -129,7 +129,7 @@ public class SessionsActivity extends AppCompatActivity {
 
 
         // send the HTTP request to get the sessions of currently logged in student
-        HttpUtils.get("/sessions/william.bouchard3@mail.mcgill.ca/", new RequestParams(), new JsonHttpResponseHandler() {
+        HttpUtils.get("/sessions/"+LoginActivity.tEmail, new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

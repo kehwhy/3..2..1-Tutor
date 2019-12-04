@@ -123,34 +123,8 @@ public class MyAvailability extends AppCompatActivity {
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         final TextView status = (TextView) findViewById(R.id.status);
 
-        // send the HTTP request to get the currently logged in user => tutorEmail
-        // This gets the correct logged in tutor but tutorEmail remains null (recurring bug, check wiki).
-        HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-                    tutorEmail = (response.getString("email"));
-                } catch (Exception e) {
-                    error += e.getMessage();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-            }
-        });
 
         // send the HTTP request to get the sessions of currently logged in student
-        /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
-        *  The method, however, works. This http request is properly integrated. If print statements
-        *  are added, you can see that we can get the correct user. */
         HttpUtils.get("/availabilities/"+LoginActivity.tEmail, new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override

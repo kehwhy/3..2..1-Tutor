@@ -20,7 +20,6 @@ import cz.msebera.android.httpclient.Header;
 *  It uses methods taken from the tutorial notes, section 4.5.4 */
 public class SetAvailability extends AppCompatActivity {
     private String error = null;
-    private String tutorEmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,36 +122,6 @@ public class SetAvailability extends AppCompatActivity {
 
         int endHours = Integer.parseInt(compsEnd[0]);
         int endMinutes = Integer.parseInt(compsEnd[1]);
-
-        // send the HTTP request to get the currently logged in user => tutorEmail
-        // This get request gets the correctly logged in user. However, we encountered a bug
-        // and have to hard code the tutorEmail. Please refer to our project Wiki for more information:
-        // https://github.com/McGill-ECSE321-Fall2019/project-group-2/wiki
-        HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                try {
-                    tutorEmail = (response.getString("email"));
-                } catch (Exception e) {
-                    error += e.getMessage();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-            }
-        });
-
-        // TODO: supply the end time to the REST request as an additional parameter
-        // Reminder: calling the service looks like this:
-        // https://eventregistration-backend-123.herokuapp.com/events/testEvent?date=2013-10-23&startTime=00:00&endTime=23:59
 
         RequestParams rp = new RequestParams();
 
