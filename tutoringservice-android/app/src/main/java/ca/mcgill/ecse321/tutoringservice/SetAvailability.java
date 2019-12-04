@@ -100,7 +100,7 @@ public class SetAvailability extends AppCompatActivity {
     // AddEvent but to be changed to SetAvailability
     // TODO : Make this SetAvailability
 
-    public void setAvailability(View v) {
+    public void setAvailabilityA(View v) {
         // start time
         TextView tv = (TextView) findViewById(R.id.startTime);
         String text = tv.getText().toString();
@@ -128,17 +128,14 @@ public class SetAvailability extends AppCompatActivity {
 
         // send the HTTP request to get the currently logged in user => tutorEmail
         HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
                 try {
-                    tutorEmail = (response.getJSONObject("tutorEmail").getString("tutorEmail"));
+                    tutorEmail = (response.getString("email"));
                 } catch (Exception e) {
                     error += e.getMessage();
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
@@ -160,13 +157,11 @@ public class SetAvailability extends AppCompatActivity {
         rp.add("startTime", formatter.format(startHours) + ":" + formatter.format(startMinutes));
         rp.add("endTime", formatter.format(endHours) + ":" + formatter.format(endMinutes));
 
-        HttpUtils.post("/availabilities/" + tutorEmail, rp, new JsonHttpResponseHandler() {
+        HttpUtils.post("/availabilities/" + "william.bouchard3@mail.mcgill.ca", rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
-//                ((TextView) findViewById(R.id.newevent_name)).setText("");
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
