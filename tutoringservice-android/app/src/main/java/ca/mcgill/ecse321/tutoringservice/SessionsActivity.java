@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.tutoringservice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +20,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcgill.ecse321.tutoringserivce.R;
+import ca.mcgill.ecse321.tutoringservice.R;
 import cz.msebera.android.httpclient.Header;
+
+
+
+
 
 public class SessionsActivity extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class SessionsActivity extends AppCompatActivity {
     private String error = null;
 
     //displays when created
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
