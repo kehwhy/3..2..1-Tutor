@@ -37,8 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
 
-
-
         <EditText
             android:id="@+id/newavail_name"
             android:layout_width="fill_parent"

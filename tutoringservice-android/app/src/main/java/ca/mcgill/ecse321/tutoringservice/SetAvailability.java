@@ -128,14 +128,17 @@ public class SetAvailability extends AppCompatActivity {
 
         // send the HTTP request to get the currently logged in user => tutorEmail
         HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
                 try {
                     tutorEmail = (response.getString("email"));
                 } catch (Exception e) {
                     error += e.getMessage();
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
@@ -162,6 +165,7 @@ public class SetAvailability extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
