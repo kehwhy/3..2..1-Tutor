@@ -79,7 +79,7 @@ public class SessionsActivity extends AppCompatActivity {
         });
         //refreshing sessions list
         refreshList(sessionAdapter, sessionNames,
-                "/sessions/william.bouchard3@mail.mcgill.ca/", "id");
+                "/sessions/"+LoginActivity.tEmail, "id");
     }
 
     private void refreshList(final ArrayAdapter<String> adapter, final List<String> names,

@@ -1,23 +1,20 @@
 package ca.mcgill.ecse321.tutoringservice;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import cz.msebera.android.httpclient.Header;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import ca.mcgill.ecse321.tutoringservice.R;
+import androidx.appcompat.app.AppCompatActivity;
+import cz.msebera.android.httpclient.Header;
 
 /* This class takes care of setting the availability for the logged in tutor.
 *  It uses methods taken from the tutorial notes, section 4.5.4 */
@@ -165,7 +162,7 @@ public class SetAvailability extends AppCompatActivity {
         rp.add("endTime", formatter.format(endHours) + ":" + formatter.format(endMinutes));
 
         // See reasons for hardcoding tutorEmail above.
-        HttpUtils.post("/availabilities/" + "william.bouchard3@mail.mcgill.ca", rp, new JsonHttpResponseHandler() {
+        HttpUtils.post("/availabilities/" + LoginActivity.tEmail, rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();

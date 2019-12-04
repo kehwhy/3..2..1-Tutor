@@ -75,7 +75,7 @@ public class MyAvailability extends AppCompatActivity {
         /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
         *  More information can be found in our Project Wiki on GitHub: https://github.com/McGill-ECSE321-Fall2019/project-group-2/wiki */
         refreshList(availAdapter, availNames,
-                "/availabilities/william.bouchard3@mail.mcgill.ca/", "id");
+                "/availabilities/"+LoginActivity.tEmail, "id");
     }
 
     private void refreshList(final ArrayAdapter<String> adapter, final List<String> names,
@@ -151,7 +151,7 @@ public class MyAvailability extends AppCompatActivity {
         /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
         *  The method, however, works. This http request is properly integrated. If print statements
         *  are added, you can see that we can get the correct user. */
-        HttpUtils.get("/availabilities/william.bouchard3@mail.mcgill.ca/", new RequestParams(), new JsonHttpResponseHandler() {
+        HttpUtils.get("/availabilities/"+LoginActivity.tEmail, new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

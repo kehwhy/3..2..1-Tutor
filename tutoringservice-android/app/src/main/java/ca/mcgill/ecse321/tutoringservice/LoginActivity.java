@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import cz.msebera.android.httpclient.Header;
 
 public class LoginActivity extends AppCompatActivity {
+
+    public static String tEmail;
+
     private String error = null;
     Intent intent;
 
@@ -71,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable throwable) {
-                System.out.println("Success!!");
+                tEmail = tvEmail.getText().toString();
                 startActivity(intent);
                 error += errorResponse;
                 refreshErrorMessage();
