@@ -23,31 +23,24 @@ import java.util.List;
 import ca.mcgill.ecse321.tutoringservice.R;
 import cz.msebera.android.httpclient.Header;
 
-
-
-
-
+/* This class gets the sessions from the backend using HTTP and displays them to the
+*  user on the app. */
 public class SessionsActivity extends AppCompatActivity {
-
-
     private ArrayAdapter<String> sessionAdapter;
     private List<String> sessionNames = new ArrayList<>();
-
     private boolean createSession = true;
-
     private String selectedSessionID = "";
 
-    private String error = null;
+    private String error = "";
 
     //displays when created
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sessions);
 
+        // Gets the spinner from the xml file and iniitializes it for the drop down view
         Spinner sessionSpinner = (Spinner) findViewById(R.id.sessionspinner);
-
         sessionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sessionNames);
         sessionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sessionSpinner.setAdapter(sessionAdapter);
@@ -65,17 +58,11 @@ public class SessionsActivity extends AppCompatActivity {
                     selectedSessionID = index.toString();
                     int index_int = Integer.parseInt(selectedSessionID)-1;
                     //refreshing table with session information using Index.
-
-
                     refreshSessionTable(index_int);
-
-
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {}
-
         });
         //refreshing sessions list
         refreshList(sessionAdapter, sessionNames,
@@ -84,13 +71,10 @@ public class SessionsActivity extends AppCompatActivity {
 
     private void refreshList(final ArrayAdapter<String> adapter, final List<String> names,
                              final String restFunctionName, final String identifier0){
-
         String fcn = restFunctionName;
         HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
                 // iterate through the objects in the response to display the information in the
                 // dropdown list
                 names.clear();
@@ -105,7 +89,6 @@ public class SessionsActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
@@ -115,8 +98,6 @@ public class SessionsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
      //called when a session is selected and the table needs to be populated with it's information
@@ -127,25 +108,22 @@ public class SessionsActivity extends AppCompatActivity {
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         final TextView status = (TextView) findViewById(R.id.status);
 
-
         // send the HTTP request to get the sessions of currently logged in student
         HttpUtils.get("/sessions/"+LoginActivity.tEmail, new RequestParams(), new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
                 try {
-                    //setting the values for table based on the data from JSON Array
+                    // setting the values for table based on the data from JSON Array by getting
+                    // needed data from the backend using HTTP request
                     date.setText(response.getJSONObject(index).getString("date"));
                     startTime.setText(response.getJSONObject(index).getString("startTime"));
                     endTime.setText(response.getJSONObject(index).getString("endTime"));
                     status.setText(response.getJSONObject(index).getString("isApproved"));
-
                 } catch (Exception e) {
                     error += e.getMessage();
                 }
             }
-
+            // Failure messages are handled in the backend.
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
