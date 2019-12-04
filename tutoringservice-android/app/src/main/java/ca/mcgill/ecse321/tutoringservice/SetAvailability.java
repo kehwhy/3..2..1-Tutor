@@ -19,6 +19,8 @@ import java.text.NumberFormat;
 
 import ca.mcgill.ecse321.tutoringservice.R;
 
+/* This class takes care of setting the availability for the logged in tutor.
+*  It uses methods taken from the tutorial notes, section 4.5.4 */
 public class SetAvailability extends AppCompatActivity {
     private String error = null;
     private String tutorEmail = "";
@@ -97,9 +99,8 @@ public class SetAvailability extends AppCompatActivity {
         tv.setText(String.format("%02d-%02d-%04d", d, m + 1, y));
     }
 
-    // AddEvent but to be changed to SetAvailability
-    // TODO : Make this SetAvailability
-
+    // This method calls the http handles to get the currently logged in user and create an
+    // availability with the information chosen through the app.
     public void setAvailabilityA(View v) {
         // start time
         TextView tv = (TextView) findViewById(R.id.startTime);
@@ -127,6 +128,9 @@ public class SetAvailability extends AppCompatActivity {
         int endMinutes = Integer.parseInt(compsEnd[1]);
 
         // send the HTTP request to get the currently logged in user => tutorEmail
+        // This get request gets the correctly logged in user. However, we encountered a bug
+        // and have to hard code the tutorEmail. Please refer to our project Wiki for more information:
+        // https://github.com/McGill-ECSE321-Fall2019/project-group-2/wiki
         HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
@@ -160,6 +164,7 @@ public class SetAvailability extends AppCompatActivity {
         rp.add("startTime", formatter.format(startHours) + ":" + formatter.format(startMinutes));
         rp.add("endTime", formatter.format(endHours) + ":" + formatter.format(endMinutes));
 
+        // See reasons for hardcoding tutorEmail above.
         HttpUtils.post("/availabilities/" + "william.bouchard3@mail.mcgill.ca", rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

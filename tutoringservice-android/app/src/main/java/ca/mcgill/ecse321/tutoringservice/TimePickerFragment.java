@@ -8,6 +8,8 @@ import android.widget.TimePicker;
 
 import androidx.fragment.app.DialogFragment;
 
+/* This class is taken from the tutorial notes section 4.5.1
+ *  This class is used in SetAvailability */
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 

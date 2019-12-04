@@ -19,18 +19,22 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcgill.ecse321.tutoringservice.R;
 import cz.msebera.android.httpclient.Header;
 
+/* This class is used to show the current availabilities of the logged in user.
+*  In order to add availabilities, go back to dashboard and select "Set Availability."
+*  Upon doing so, you will see it when you come back to this page.
+*  This code is similar to SessionsActivity to have a mutual format. */
 public class MyAvailability extends AppCompatActivity {
 
 
-    private ArrayAdapter<String> sessionAdapter;
-    private List<String> sessionNames = new ArrayList<>();
+    private ArrayAdapter<String> availAdapter;
+    private List<String> availNames = new ArrayList<>();
 
-    private boolean createSession = true;
+    private boolean createAvail = true;
+    private String tutorEmail;
 
-    private String selectedSessionID = "";
+    private String selectedAvailID = "";
 
     private String error = null;
 
@@ -40,30 +44,26 @@ public class MyAvailability extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_availability);
 
-        Spinner sessionSpinner = (Spinner) findViewById(R.id.sessionspinner);
+        Spinner availSpinner = (Spinner) findViewById(R.id.availspinner);
 
-        sessionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sessionNames);
-        sessionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sessionSpinner.setAdapter(sessionAdapter);
+        availAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availNames);
+        availAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        availSpinner.setAdapter(availAdapter);
 
-        sessionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        availSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // listener code is run twice - once at creation and once when selection is made
                 // ensures that the selection is not requested upon creation
-                if(createSession == true){
-                    createSession = false;
+                if(createAvail == true){
+                    createAvail = false;
                 }
                 else {
                     Object index = parentView.getSelectedItemPosition();
-                    selectedSessionID = index.toString();
-                    int index_int = Integer.parseInt(selectedSessionID)-1;
+                    selectedAvailID = index.toString();
+                    int index_int = Integer.parseInt(selectedAvailID)-1;
                     //refreshing table with session information using Index.
-
-
-                    refreshSessionTable(index_int);
-
-
+                    refreshAvailTable(index_int);
                 }
             }
 
@@ -72,7 +72,9 @@ public class MyAvailability extends AppCompatActivity {
 
         });
         //refreshing sessions list
-        refreshList(sessionAdapter, sessionNames,
+        /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
+        *  More information can be found in our Project Wiki on GitHub: https://github.com/McGill-ECSE321-Fall2019/project-group-2/wiki */
+        refreshList(availAdapter, availNames,
                 "/availabilities/william.bouchard3@mail.mcgill.ca/", "id");
     }
 
@@ -113,16 +115,42 @@ public class MyAvailability extends AppCompatActivity {
 
     }
 
-    //called when a session is selected and the table needs to be populated with it's information
-    public void refreshSessionTable(final int index){
+    /* This is called when a session is selected and the table needs to be populated with it's information */
+    public void refreshAvailTable(final int index){
         // get the text objects by id from the view so that they can be populated
         final TextView date = (TextView) findViewById(R.id.date);
         final TextView startTime = (TextView) findViewById(R.id.startTime);
         final TextView endTime = (TextView) findViewById(R.id.endTime);
         final TextView status = (TextView) findViewById(R.id.status);
 
+        // send the HTTP request to get the currently logged in user => tutorEmail
+        // This gets the correct logged in tutor but tutorEmail remains null (recurring bug, check wiki).
+        HttpUtils.get("/user/", new RequestParams(), new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                try {
+                    tutorEmail = (response.getString("email"));
+                } catch (Exception e) {
+                    error += e.getMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+            }
+        });
 
         // send the HTTP request to get the sessions of currently logged in student
+        /* The user "william.bouchard3@mail.mcgill.ca" is hard coded because we encountered a bug.
+        *  The method, however, works. This http request is properly integrated. If print statements
+        *  are added, you can see that we can get the correct user. */
         HttpUtils.get("/availabilities/william.bouchard3@mail.mcgill.ca/", new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override

@@ -8,7 +8,8 @@ import android.view.View;
 
 import ca.mcgill.ecse321.tutoringservice.R;
 
-public class availabilityActivity extends AppCompatActivity {
+/* This class is used as a dashboard to select to view or set availability. */
+public class AvailabilityActivity extends AppCompatActivity {
 
 
     public void openAvailab(View view) {

@@ -12,12 +12,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import ca.mcgill.ecse321.tutoringservice.R;
-
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "ca.mcgill.ecse321.tutoringservice.MESSAGE";
@@ -45,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAvail(View viewa) {
-        Intent intent1 = new Intent(this, availabilityActivity.class);
+        Intent intent1 = new Intent(this, AvailabilityActivity.class);
         startActivity(intent1);
     }
 

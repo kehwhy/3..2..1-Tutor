@@ -16,16 +16,16 @@
 
         <activity
             android:name="ca.mcgill.ecse321.tutoringservice.SetAvailability"
-            android:parentActivityName="ca.mcgill.ecse321.tutoringservice.availabilityActivity">
+            android:parentActivityName="ca.mcgill.ecse321.tutoringservice.AvailabilityActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.mcgill.ecse321.tutoringservice.availabilityActivity" />
+                android:value="ca.mcgill.ecse321.tutoringservice.AvailabilityActivity" />
         </activity>
 
         <activity
-            android:name="ca.mcgill.ecse321.tutoringservice.availabilityActivity"
+            android:name="ca.mcgill.ecse321.tutoringservice.AvailabilityActivity"
             android:parentActivityName="ca.mcgill.ecse321.tutoringservice.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
